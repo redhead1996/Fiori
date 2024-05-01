@@ -1,13 +1,14 @@
 <mvc:View controllerName="invoicelist.invoice01.controller.MainView"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
     <Page id="page" title="{i18n>title}">
         <content> 
-          <Panel id="_IDGenPanel3"  headerText="{i18n>selectionScreen}" >
-                <Label id="labelShipName" labelFor="shipName" text="{i18n>shipName}" class="sapUiSmallMargin"/>
-                <Input id="shipName" value="{selectionScreen>/ShipName}" width="200px" class="sapUiSmallMarginEnd" />
-                <Label id="labelCountry" text="{i18n>country}" class="sapUiSmallMargin"/>
-                <Select id="slCountry" selectedKey="{selectionScreen>/CountryKey}" 
+          <Panel id="_IDGenPanel1" headerText="{i18n>selectionScreen}">
+            <Label id="labelShipName" labelFor="shipName" text="{i18n>shipName}" class="sapUiSmallMargin"/>
+            <Input id="shipName" value="{selectionScreen>/ShipName}" width="200px" class="sapUiSmallMarginEnd" />
+            <Label id="labelCountry" text="{i18n>country}" class="sapUiSmallMargin"/>
+            <Select id="slCountry" selectedKey="{selectionScreen>/CountryKey}" 
                 forceSelection="false" items="{selectionScreen>/Countries}" >
                     <items>
                          <core:Item id="_IDGenItem1"  key="{selectionScreen>key}" text="{selectionScreen>text}"/>
@@ -23,29 +24,30 @@
                 icon="sap-icon://clear-filter"
                 press="onClearFilter" 
                 class="sapUiSmallMarginEnd"/>
-                          </Panel>
-						   <Panel id="_IDGenPanel2">
-            <List   id="invoicesList"
+          </Panel>
+          <Panel id="_IDGenPanel2" >
+          <List   id="invoicesList"
                     headerText="{i18n>invoicesHeaderList}" 
                     class="sapUiResponsiveMargin"
                     width="auto" 
-                    items="{/Invoices}">
+                    items="{path:'mNorthwind>/Invoices'}">
                 <items>
-                <ObjectListItem id="_IDGenObjectListItem1" 
-                                title="{ShipName} - {Country}"  
-                                number="{parts:[{path:'ExtendenPrice'},
-                                                    {path:'selectionScreen>/Currency'}],
-                                                    type:'sap.ui.model.type.Currency',
-                                                    formatOptions:{
-                                                        showMeasure : false
-                                                    }}"
-                                numberUnit="{selectionScreen>/Currency}" 
-                                >
-                
-                </ObjectListItem>
+                    <ObjectListItem id="_IDGenObjectListItem1" 
+                                    title="{mNorthwind>ShipName} - {mNorthwind>Country}"  
+                                    number="{parts:[{path:'ExtendedPrice'},
+                                                        {path:'selectionScreen>/Currency'}],
+                                                        type:'sap.ui.model.type.Currency',
+                                                        formatOptions:{
+                                                            showMeasure : false
+                                                        }}"
+                                    numberUnit="{selectionScreen>/Currency}"
+                                    numberState="{= $ {ExtendedPrice} > 100 ? 'Success' : 'Warning' }" 
+                                    >
+                    
+                    </ObjectListItem>
                 </items>
             </List>
-            </Panel>
+          </Panel>
         </content>
     </Page>
 </mvc:View>

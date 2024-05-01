@@ -27,6 +27,17 @@
           }
         }
       }
+    },
+    "dataSources": {
+      "mainService":{
+        "uri": "/v2/northwind/northwind.svc",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
     }
   },
   "sap.ui": {
@@ -70,6 +81,10 @@
         "settings": {
           "bundleName": "invoicelist.invoice01.i18n.i18n"
         }
+      },
+      "mNorthwind":{
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "dataSource": "mainService"
       }
     },
     "resources": {
